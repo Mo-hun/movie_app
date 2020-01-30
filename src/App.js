@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PropTypes from 'prop-types';
+
+function Food(props) {
+  return (
+    <div>
+      <h1>I like {props.name}</h1>
+      <h4>{props.rating}/5</h4>
+      <span>{props.img}</span>
+    </div>
+  );
+}
+
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  rating: PropTypes.number
+}
+
+const FoodList = [
+  {id:1,name: "kimch", image: "<b>img</b>", rating: 5.0},
+  {id:2,name: "ramen", image: "<b>img</b>", rating: 3.6},
+  {id:3,name: "samgiopsal", image: "<b>img</b>", rating: 2.1},
+  {id:4,name: "chuckumi", image: "<b>img</b>", rating: 0.9}
+]
+
+function renderFood(dish){
+  return <Food key={dish.id} name={dish.name} img={dish.image} rating={dish.rating}/>
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>Hello</div>
+      {FoodList.map(renderFood)}
     </div>
-  );
+    );
 }
 
 export default App;
